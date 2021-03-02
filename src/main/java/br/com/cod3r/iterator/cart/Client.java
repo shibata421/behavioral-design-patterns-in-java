@@ -1,10 +1,22 @@
 package br.com.cod3r.iterator.cart;
 
-public class Client {
+import java.util.stream.StreamSupport;
 
-	@SuppressWarnings("unused")
+public class Client {
+	
 	public static void main(String[] args) {
-		Cart cart = new Cart(new Product("TV", 1000d), new Product("Shoe", 59.99d), new Product("Pencil", 0.5d));
+		Cart cart = new Cart(
+				new Product("TV", 1000d), 
+				new Product("Shoe", 59.99d), 
+				new Product("Pencil", 0.5d));
 		
+		for (Product product : cart) {
+			System.out.println(product);
+		}
+		
+		Double sum = StreamSupport.stream(cart.spliterator(), false)
+				.map(product -> product.getValue())
+				.reduce(0.0, (acc, value) -> acc + value);
+		System.out.println(sum);
 	}
 }
