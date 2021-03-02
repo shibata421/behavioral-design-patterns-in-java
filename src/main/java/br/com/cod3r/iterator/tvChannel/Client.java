@@ -6,8 +6,12 @@ public class Client {
 		TV tv = new TV();
 		tv.searchAvaiableChannels();
 
-		for(int i = 1; i < 30; i++) {
+		for(int i = 1; i < TV.NUMBER_OF_CHANNELS; i++) {
 			tv.accessChannel(i);
+		}
+		
+		for (Integer channel : tv) {
+			System.out.println("Channel " + channel);
 		}
 	}
 }
