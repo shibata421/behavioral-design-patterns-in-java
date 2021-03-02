@@ -1,24 +1,35 @@
 package br.com.cod3r.chain.billsDispenser;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Dispenser {
+
+	private Bill chain;
+
+	public Dispenser() {
+		List<Bill> billList = Arrays.asList(BrazilianBills.values()).stream()
+				.map(bill -> bill.getValue())
+				.collect(Collectors.toList());
+		organizeChain(billList);
+	}
 	
-	public void withdraw(Integer ammount) {
-		Integer remaining = ammount;
-		System.out.println("Calculating bills set for $" + ammount);
-		if(remaining >= 50) {
-			int bills = remaining / 50;
-			remaining %= 50;
-			System.out.println(String.format("- %d bill(s) of $%d, $%d remaining", bills, 50, remaining));
+	public Dispenser(Bill...bills) {
+		organizeChain(Arrays.asList(bills));
+	}
+
+	private void organizeChain(List<Bill> bills) {
+		for (int i = 0; i < bills.size() - 1; i++) {
+			bills.get(i).setNext(bills.get(i + 1));
 		}
-		if(remaining >= 10) {
-			int bills = remaining / 10;
-			remaining %= 10;
-			System.out.println(String.format("- %d bill(s) of $%d, $%d remaining", bills, 10, remaining));
-		}
-		if(remaining >= 1) {
-			int bills = remaining / 1;
-			remaining %= 1;
-			System.out.println(String.format("- %d bill(s) of $%d, $%d remaining", bills, 1, remaining));
-		}
+		
+		this.chain = bills.get(0);
+		
+	}
+
+	public void withdraw(Integer amount) {
+		System.out.println("Calculating bills set for $" + amount);
+		chain.execute(amount);
 	}
 }

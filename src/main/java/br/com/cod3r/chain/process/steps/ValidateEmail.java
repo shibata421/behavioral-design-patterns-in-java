@@ -2,15 +2,14 @@ package br.com.cod3r.chain.process.steps;
 
 import br.com.cod3r.chain.process.service.ProcessContext;
 
-public class CreateMap extends ProcessStep {
-
-	public CreateMap(Object... args) {
-		super(args);
-	}
+public class ValidateEmail extends ValidateMandatoryField {
 
 	@Override
 	public ProcessContext execute(ProcessContext context) throws Exception {
-		context.encapsulate((String) args[0]);
+		String email = context.getUserEmail();
+		
+		super.validate(email, "email");
+		
 		return next(context, true);
 	}
 

@@ -9,5 +9,9 @@ public class TextAreaWithMemory extends JTextArea {
 		super(rows, columns);
 	}
 
+	public void restore(String string) {
+		this.setText(string);
+	}
+
 
 }

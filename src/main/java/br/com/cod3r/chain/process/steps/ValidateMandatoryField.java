@@ -1,18 +1,11 @@
 package br.com.cod3r.chain.process.steps;
 
-import br.com.cod3r.chain.process.service.ProcessContext;
+public abstract class ValidateMandatoryField extends ProcessStep<Boolean> {
 
-public class ValidateMandatoryField extends ProcessStep {
-
-	public ValidateMandatoryField(Object... args) {
-		super(args);
+	protected void validate (String field, String fieldName) throws Exception {
+		if(field == null) {
+			throw new Exception(fieldName + " is empty");
+		}
 	}
-
-	@Override
-	public ProcessContext execute(ProcessContext context) throws Exception {
-		Object field = context.get((String) args[0]);
-		if(field == null) throw new Exception(String.format("%s is empty", args[0]));
-		return next(context, true);
-	}
-
+	
 }

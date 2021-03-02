@@ -1,53 +1,57 @@
 package br.com.cod3r.chain.process.service;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import br.com.cod3r.chain.process.entities.User;
 
 public class ProcessContext {
-	private Map<String, Object> context;
+
 	private Object processResult;
-	
+	private User user;
+
 	public ProcessContext() {
-		context = new LinkedHashMap<String, Object>();
-	}
-
-	@SuppressWarnings("unchecked")
-	public Object get(String key) throws Exception {
-		if(!key.contains(".")) return context.get(key);
-		String[] steps = key.split("\\.");
-		Object currentMap = context;
-		for(String step: steps) {
-			if(currentMap instanceof Map)
-				currentMap = ((Map<String, Object>) currentMap).get(step);
-			else throw new Exception(String.format("Could not navigate through %s step", step));
-		}
-		return currentMap;
-	}
-
-	public Object put(String key, Object value) {
-		return context.put(key, value);
-	}
-
-	public Object remove(String key) {
-		return context.remove(key);
+		this(new User());
 	}
 	
+	public ProcessContext(User user) {
+		this.user = user;
+	}
+	
+	public void setUserName(String name) {
+		user.setName(name);
+	}
+
 	public void reset() {
-		context = new LinkedHashMap<String, Object>();
 		processResult = null;
 	}
-	
-	public void encapsulate(String key) {
-		Map<String, Object> newContext = new LinkedHashMap<String, Object>();
-		newContext.put(key, context);
-		context = newContext;
-	}
-	
+
 	public void addProcessResult(Object result) {
 		this.processResult = result;
 	}
-	
+
 	public Object getProcessResult() {
 		return processResult;
+	}
+
+	public void setUserEmail(String email) {
+		user.setEmail(email);
+	}
+	
+	public void setUserPassword(String password) {
+		user.setPassword(password);
+	}
+
+	public String getUserEmail() {
+		return user.getEmail();
+	}
+	
+	public String getUserName() {
+		return user.getName();
+	}
+	
+	public String getUserPassword() {
+		return user.getPassword();
+	}
+
+	public User getUser() {
+		return this.user;
 	}
 }
