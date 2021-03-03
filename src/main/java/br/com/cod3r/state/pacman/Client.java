@@ -12,14 +12,30 @@ public class Client {
 		Game game = new Game();
 		game.addListener(option -> {
 			switch (option) {
-				case "1": ghost.spotPacman(); break;
-				case "2": ghost.losePacman(); break;
-				case "3": ghost.pacmanTurnsSpecial(); break;
-				case "4": ghost.pacmanTurnsNormal(); break;
-				case "5": ghost.eatenByPacman(); break;
-				case "6": ghost.reachTheBase(); break;
-				case "0": game.stopLoop(); break;
-				default: System.out.println("Invalid Option"); break;
+			case "1":
+				ghost.spotPacman();
+				break;
+			case "2":
+				ghost.losePacman();
+				break;
+			case "3":
+				ghost.pacmanTurnsSpecial();
+				break;
+			case "4":
+				ghost.pacmanTurnsNormal();
+				break;
+			case "5":
+				ghost.eatenByPacman();
+				break;
+			case "6":
+				ghost.reachTheBase();
+				break;
+			case "0":
+				game.stopLoop();
+				break;
+			default:
+				System.out.println("Invalid Option");
+				break;
 			}
 		});
 
