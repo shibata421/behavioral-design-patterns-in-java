@@ -1,13 +1,21 @@
 package br.com.cod3r.observer.party.characters;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 public class Doorman {
-	private boolean status = false;
 	
-	public boolean getStatus() {
-		return this.status;
+	private Collection<PartyObserver> partyObservers;
+	
+	public Doorman() {
+		this.partyObservers = new HashSet<>();
 	}
 	
-	public void setStatus(boolean newStatus) {
-		this.status = newStatus;
+	public void mainEvent() {
+		partyObservers.forEach(o -> o.partyTime());
+	}
+
+	public void register(PartyObserver observer) {
+		this.partyObservers.add(observer);
 	}
 }
