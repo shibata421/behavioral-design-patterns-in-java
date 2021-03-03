@@ -1,7 +1,7 @@
 package br.com.cod3r.strategy.worker;
 
 import br.com.cod3r.strategy.worker.jobs.Developer;
-import br.com.cod3r.strategy.worker.jobs.HispsterDeveloper;
+import br.com.cod3r.strategy.worker.jobs.HealthyDeveloper;
 import br.com.cod3r.strategy.worker.jobs.Pilot;
 import br.com.cod3r.strategy.worker.jobs.Worker;
 
@@ -22,7 +22,7 @@ public class Client {
 		Worker ann = new Pilot();
 		presentYourself(ann, "Ann");
 
-		Worker carol = new HispsterDeveloper();
+		Worker carol = new HealthyDeveloper();
 		presentYourself(carol, "carol");
 		
 		

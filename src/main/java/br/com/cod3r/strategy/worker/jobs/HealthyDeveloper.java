@@ -1,19 +1,19 @@
 package br.com.cod3r.strategy.worker.jobs;
 
-import br.com.cod3r.strategy.worker.strategies.eat.MeatStrategy;
-import br.com.cod3r.strategy.worker.strategies.transportation.CarStrategy;
+import br.com.cod3r.strategy.worker.strategies.eat.VeggieStrategy;
+import br.com.cod3r.strategy.worker.strategies.transportation.BikeStrategy;
 import br.com.cod3r.strategy.worker.strategies.work.CodeStrategy;
 
-public class Developer implements Worker {
+public class HealthyDeveloper implements Worker {
 
 	@Override
 	public void eat() {
-		new MeatStrategy().eat();
+		new VeggieStrategy().eat();
 	}
 
 	@Override
 	public void move() {
-		new CarStrategy().move();
+		new BikeStrategy().move();
 	}
 
 	@Override
