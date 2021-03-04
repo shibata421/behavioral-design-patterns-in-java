@@ -1,8 +1,11 @@
 package br.com.cod3r.template.sales.model;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class Cart {
+public class Cart implements Iterable<Product>{
+	
 	private Buyer buyer;
 	private List<Product> items;
 	
@@ -20,10 +23,23 @@ public class Cart {
 	}
 
 	public List<Product> getItems() {
-		return items;
+		return Collections.unmodifiableList(items);
+	}
+	
+	public Double getTotalValue() {
+		return items.stream()
+				.map(product -> product.getValue())
+				.reduce(0.0, (acc, value) -> acc += value);
+	}
+	
+	public Double getTotalWeight() {
+		return items.stream()
+				.map(product -> product.getWeight())
+				.reduce(0.0, (acc, weight) -> acc += weight);
 	}
 
-	public void setItems(List<Product> items) {
-		this.items = items;
+	@Override
+	public Iterator<Product> iterator() {
+		return items.iterator();
 	}
 }
